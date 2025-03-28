@@ -5,7 +5,7 @@ A robust Spring Boot-based Referral Tracking System that enables user signup wit
 
 ## Technology Stack
 - Spring Boot 3.x
-- MySQL Database
+- H2 In-Memory Database
 - Spring Security
 - JPA/Hibernate
 - Swagger/OpenAPI Documentation
@@ -90,14 +90,15 @@ A robust Spring Boot-based Referral Tracking System that enables user signup wit
 ### Prerequisites
 - Java 17+
 - Maven
-- MySQL Database
 
 ### Configuration
 1. Database Configuration in `application.properties`
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/referral_system
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+# H2 Database Configuration
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
 ```
 
 ### Running the Application
@@ -108,6 +109,15 @@ mvn clean package
 # Run the application
 java -jar target/referral-tracking-1.0.0.jar
 ```
+
+### Accessing H2 Console
+After starting the application, the H2 database console can be accessed at:
+```
+http://localhost:8080/h2-console
+```
+- JDBC URL: `jdbc:h2:mem:referral_system`
+- Username: `sa`
+- Password: (leave empty)
 
 ## Postman Testing
 
@@ -136,3 +146,5 @@ java -jar target/referral-tracking-1.0.0.jar
 - Efficient Referral Code Generation
 - Optimized Database Queries
 - Stateless Authentication
+
+
